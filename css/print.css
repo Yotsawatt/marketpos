@@ -1,0 +1,25 @@
+@page{
+    margin: 0px 5px 0px 5px;
+    width: 8cm;
+    height: 10cm;
+}
+
+
+.text-center{
+    text-align: center;
+}
+.sechead{
+    font-size: 13px;
+}
+.sizeproduct{
+    font-size: 12px;
+}
+.text-right{
+    text-align: right;
+}
+th{
+    text-align: left;
+}
+.queueorder{
+    font-size: 28px;
+}
