@@ -46,7 +46,7 @@
                             echo "<td>".$row['product_number']."</td>";
                             echo "<td>".$row['product_price']."</td>";
                             echo "<td>".$row['product_totalprice']."</td>";
-                            echo "<td>".$row['time']."</td>";
+                            echo "<td>".$row['timeorder']."</td>";
                             echo "<td><a href='reportall_edit.php?id=".$row['id']." ' class='btn blue'>แก้ไข</a>
                             <a href='reportall_sql.php?id=".$row['id']."&mode=2 ' class='btn red' onclick='return confirmm()'>ลบ</a></td>";
                             echo "</tr>";

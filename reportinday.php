@@ -49,7 +49,7 @@
                 </thead>
                 <?php 
                     $sqlshow = "SELECT *,SUM(product_number) AS product_number, SUM(product_totalprice) AS product_total
-                    FROM orderall WHERE DATE(time)='$ordertime' GROUP BY product_name";
+                    FROM orderall WHERE DATE(timeorder)='$ordertime' GROUP BY product_name";
                     $showquery = $connect->query($sqlshow);
                     $count = 1;
                     $sum_number = 0;

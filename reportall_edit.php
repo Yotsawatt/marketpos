@@ -16,23 +16,23 @@
     ?>
     <div class="container">
         <div class="row addproduct">
-        <form action="product_sql.php" method="post">
+        <form action="reportall_sql.php" method="GET">
             <!-- row1 -->
             <div class="row">
                 <div class="input-field col s12 m3">
-                    <input type="text" name="product_id" id="product_id" class="validate" value="<?php echo $row["order_code"]; ?>" disabled >
-                    <label for="product_id">รหัสการสั่ง</label>
+                    <input type="text" name="order_code" id="order_code" class="validate" value="<?php echo $row["order_code"]; ?>" disabled >
+                    <label for="order_code">รหัสการสั่ง</label>
                 </div>
                 <div class="input-field col s12 m3">
-                    <input type="text" name="barcode" id="barcode" class="validate" value="<?php echo $row["time"]; ?>" >
-                    <label for="barcode">เวลาทำรายการ</label>
+                    <input type="text" name="time" id="time" class="validate" value="<?php echo $row["timeorder"]; ?>" >
+                    <label for="time">เวลาทำรายการ</label>
                 </div>
                 <div class="input-field col s12 m3">
                     <input type="text" name="product_name" id="product_name" class="validate" value="<?php echo $row["product_name"]; ?>" disabled>
                     <label for="product_name">รายการสินค้า</label>
                 </div>
                 <div class="input-field col s12 m3">
-                    <select name="category" id="category">
+                    <select name="category" id="category" disabled>
                         <option value="<?php echo $row["product_category"]; ?>" ><?php echo $row["product_category"]; ?></option>
                         <option value="เครื่องดื่ม">เครื่องดื่ม</option>
                         <!-- <option value="อาหาร">อาหาร</option> -->
@@ -45,23 +45,24 @@
             <!-- row2 -->
             <div class="row">
                 <div class="input-field col s12 m3">
-                    <input type="text" name="price" class="validate" id="price" value="<?php echo $row["product_number"]; ?>">
-                    <label for="price">จำนวน</label>
+                    <input type="text" name="product_number" class="validate" id="product_number" value="<?php echo $row["product_number"]; ?>">
+                    <label for="product_number">จำนวน</label>
                 </div>
                 <div class="input-field col s12 m3">
-                    <input type="text" name="product_number" class="validate" id="product_number" value="<?php echo $row["product_price"]; ?>" disabled>
-                    <label for="product_number">ราคา</label>
+                    <input type="text" name="price" class="validate" id="price" value="<?php echo $row["product_price"]; ?>" disabled>
+                    <label for="price">ราคา</label>
                 </div>
                 <div class="input-field col s12 m3">
-                    <input type="text" name="unit" class="validate" id="unit" value="<?php echo $row["product_totalprice"]; ?>" disabled>
-                    <label for="unit">ราคารวม</label>
+                    <input type="text" name="product_totalprice" class="validate" id="product_totalprice" value="<?php echo $row["product_totalprice"]; ?>" disabled>
+                    <label for="product_totalprice">ราคารวม</label>
                 </div>
             </div>
             <!-- row3 -->
             <div class="row">
                 <div class="col s12 m12 center-align">
                     <input type="submit" value="แก้ไขรายการ" class="btn btn-large">
-                    <input type="hidden" name="fnc" value="2">
+                    <input type="hidden" name="old_price" value="<?php echo $row["product_price"]; ?>">
+                    <input type="hidden" name="mode" value="1">
                     <input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
                     <a href="reportall.php" class="btn red btn-large">ยกเลิก</a>
                 </div>
