@@ -81,7 +81,7 @@ $header=array('ลำดับ','หมวดหมู่','รายการ�
 //*** Load MySQL Data ***//
 require("src/connect.php");
 $strSQL = "SELECT *,SUM(product_number) AS product_number, SUM(product_totalprice) AS product_total
-FROM orderall WHERE DATE(time)='$ordertime' GROUP BY product_name ORDER BY product_category ASC";
+FROM orderall WHERE DATE(timeorder)='$ordertime' GROUP BY product_name ORDER BY product_category ASC";
 $objQuery = mysqli_query($connect,$strSQL);
 $resultData = array();
 for ($i=0;$i<mysqli_num_rows($objQuery);$i++) {

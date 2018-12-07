@@ -8,13 +8,14 @@
     $modeupd = $_POST["modeupd"];
     $modedel = $_GET["modedel"];
     $iddel = $_GET["iddel"];
+    $discount = $_POST["discount"];
 
-    $lastprice = $product_number*$product_price;
+    $lastprice = ($product_number*$product_price)-$discount;
 
 
     if($modeupd == 1){
         $sqlupd = "UPDATE temp_order 
-        SET product_number='$product_number',product_totalprice='$lastprice'
+        SET product_number='$product_number',product_totalprice='$lastprice',discount='$discount'
         WHERE id = $id; ";
         if($connect->query($sqlupd)){
             header('location:main.php?barcodesearch=');

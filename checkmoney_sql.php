@@ -24,7 +24,7 @@
     $maxId3 = substr("000".$maxId3,-3);
     $queueorder = $maxId3;
 
-    echo $genrow3['queueorder']."<br>".$queueorder;
+    // echo $genrow3['queueorder']."<br>".$queueorder;
 
     // echo $sum."<br>".$total."<br>".$moneyin;
     $new_number = 0;
@@ -39,9 +39,10 @@
         $product_price = $rowtemp["product_price"];
         $product_totalprice = $rowtemp["product_totalprice"];
         $product_category = $rowtemp["product_category"];
+        $discount = $rowtemp["discount"];
 
-        $sqlinsert = "INSERT INTO orderall (order_code,product_id,barcode,product_name,product_number,product_unit,product_price,product_totalprice,total_price,moneyin,sumchange,queueorder,product_category)
-        VALUES ('$order_code','$product_id','$barcode','$product_name','$product_number','$product_unit','$product_price','$product_totalprice','$total','$moneyin','$sumchange','$queueorder','$product_category')";
+        $sqlinsert = "INSERT INTO orderall (order_code,product_id,barcode,product_name,product_number,product_unit,product_price,product_totalprice,total_price,moneyin,sumchange,queueorder,product_category,discount)
+        VALUES ('$order_code','$product_id','$barcode','$product_name','$product_number','$product_unit','$product_price','$product_totalprice','$total','$moneyin','$sumchange','$queueorder','$product_category','$discount')";
         if($connect->query($sqlinsert)){
 
             $selpro = "SELECT * FROM product WHERE product_id = $product_id";

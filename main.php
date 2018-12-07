@@ -70,8 +70,9 @@
                         <tr>
                             <th>No.</th>
                             <th>ชื่อสินค้า</th>
-                            <th>ราคา</th>
                             <th>จำนวน</th>
+                            <th>ราคา</th>
+                            <th>ส่วนลด</th>
                             <th>รวม</th>
                             <th>แก้ไข/ลบ</th>
                         </tr>
@@ -90,7 +91,7 @@
                                 echo "<td>".$rowtemp['product_name']."</td>";
                                 echo "<td>".$rowtemp['product_price']."</td>";
                                 echo "<td>".$rowtemp['product_number']."</td>";
-                                // echo "<td>".$rowtemp['discount']."</td>";
+                                echo "<td>".$rowtemp['discount']."</td>";
                                 echo "<td>".$rowtemp['product_totalprice']."</td>";
                                 echo "<td>
                                 <a href='temporder_upd.php?id=".$rowtemp['id']."' class='btn btn-small blue' >แก้ไข</a>

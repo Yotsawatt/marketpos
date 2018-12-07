@@ -53,6 +53,10 @@
                     <label for="price">ราคา</label>
                 </div>
                 <div class="input-field col s12 m3">
+                    <input type="text" name="discount" class="validate" id="discount" value="<?php echo $row["discount"]; ?>">
+                    <label for="discount">ส่วนลด</label>
+                </div>
+                <div class="input-field col s12 m3">
                     <input type="text" name="product_totalprice" class="validate" id="product_totalprice" value="<?php echo $row["product_totalprice"]; ?>" disabled>
                     <label for="product_totalprice">ราคารวม</label>
                 </div>

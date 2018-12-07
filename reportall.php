@@ -27,6 +27,7 @@
                         <th>รายการสินค้า</th>
                         <th>จำนวน</th>
                         <th>ราคา</th>
+                        <th>ส่วนลด</th>
                         <th>ราคารวม</th>
                         <th>วันที่ทำรายการ</th>
                         <th>แก้ไข/ลบ</th>
@@ -45,6 +46,7 @@
                             echo "<td>".$row['product_name']."</td>";
                             echo "<td>".$row['product_number']."</td>";
                             echo "<td>".$row['product_price']."</td>";
+                            echo "<td>".$row['discount']."</td>";
                             echo "<td>".$row['product_totalprice']."</td>";
                             echo "<td>".$row['timeorder']."</td>";
                             echo "<td><a href='reportall_edit.php?id=".$row['id']." ' class='btn blue'>แก้ไข</a>

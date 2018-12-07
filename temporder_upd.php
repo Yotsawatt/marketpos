@@ -26,9 +26,13 @@
                     <input type="text" id="product_name" value="<?php echo $row["product_name"]; ?>" disabled>
                     <label for="product_name">รายการสินค้า</label>
                 </div>
-                <div class="input-field col s12 m6">
+                <div class="input-field col s12 m3">
                     <input type="text" id="product_price" value="<?php echo $row["product_price"]; ?>" disabled>
                     <label for="product_price">ราคา</label>
+                </div>
+                <div class="input-field col s12 m3">
+                <input type="text" name="product_totalprice" id="product_totalprice" value="<?php echo $row["product_totalprice"]; ?>" disabled>
+                    <label for="product_totalprice">ราคารวม</label>
                 </div>
             </div>
             <!-- end row1 -->
@@ -38,8 +42,8 @@
                     <label for="product_number">จำนวนสินค้า</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input type="text" name="product_totalprice" id="product_totalprice" value="<?php echo $row["product_totalprice"]; ?>" disabled>
-                    <label for="product_totalprice">ราคารวม</label>
+                    <input type="text" name="discount" id="discount" value="<?php echo $row["discount"]; ?>">
+                    <label for="discount">ส่วนลด</label>
                 </div>
             </div>
             <!-- end row2 -->
