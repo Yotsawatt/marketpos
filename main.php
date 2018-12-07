@@ -138,19 +138,7 @@
                         $i = 1;
 
                         while($show1 = $queryshow1->fetch_array()){
-                            if($i==1){
-                                echo "<div class='row'>";
-                            }
-                            echo "<div class='col s12 m3 ' ><a href='main.php?barcodesearch=".$show1['barcode']."' >".$show1['product_name']."</a></div>";
-                            // echo "<div class='col s12 m3'><a href='main.php?barcodesearch=".$show1['barcode']."' class='collection-item' >".$show1['product_name']."</a></div>";
-                            if($i == 4){
-                                $i = 1;
-                                echo "</div>";
-                            }
-                            else{
-                                $i++;
-                            }
-                            
+                            echo "<div class='col s12 m3 ' ><a href='main.php?barcodesearch=".$show1['barcode']."' class='btn btncus' >".$show1['product_name']."</a></div>";
                         }
 
                     ?>
