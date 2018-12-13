@@ -8,7 +8,9 @@
     <?php 
         require('src/header.php');
         //require('src/connect.php'); 
-        $ordertime = $_GET['ordertime'];
+        // $ordertime = $_GET['ordertime'];
+        $begintime = $_GET["begintime"];
+        $lasttime = $_GET["lasttime"];
     ?>
     <div class="container">
         <div class="row phead">
@@ -18,16 +20,20 @@
         </div>
         <div class="row">
             <form action="reportinday.php" method="GET">
-                <div class="col s12 m6">
-                    <span class="texthead">รายการประจำวันที่ : <?php echo date('d-m-Y',strtotime($ordertime)); ?></span>
+                <div class="col s12 m5">
+                    <span style="font-size:16px;">รายการประจำวันที่ : <?php echo date('d-m-Y',strtotime($begintime)); ?> ถึงวันที่ : <?php echo date('d-m-Y',strtotime($lasttime)); ?> </span>
                 </div>
-                <div class="col s12 m3">
-                    <input type="date" id="ordertime" name="ordertime" value="<?php echo date('y-m-d') ?>">
-                    <label for="ordertime">เลือกวันที่</label>
+                <div class="col s12 m2">
+                    <input type="date" id="begintime" name="begintime" value="<?php echo date('y-m-d') ?>">
+                    <label for="begintime">เลือกวันที่</label>
+                </div>
+                <div class="col s12 m2">
+                    <input type="date" id="lasttime" name="lasttime" value="<?php echo date('y-m-d') ?>">
+                    <label for="lasttime">ถึงวันที่</label>
                 </div>
                 <div class="col s12 m3">
                     <input type="submit" class="btn blue" value="ต้นหา">
-                    <a href="pdfinday.php?ordertime=<?php echo $ordertime; ?> " class="btn red darken-2" target="_blank" >ปริ้นรายงาน</a>
+                    <a href="pdfinday.php?begintime=<?php echo $begintime; ?>&lasttime=<?php echo $lasttime; ?>" class="btn red darken-2" target="_blank" >ปริ้นรายงาน</a>
                 </div>
             </form>
         </div>
@@ -60,7 +66,7 @@
 
 
                         $sqlshow = "SELECT *,SUM(product_number) AS product_number, SUM(product_totalprice) AS product_total,SUM(discount) AS discount
-                        FROM orderall WHERE DATE(timeorder)='$ordertime' AND product_category='$catehead' GROUP BY product_name";
+                        FROM orderall WHERE DATE(timeorder) >='$begintime' AND DATE(timeorder) <='$lasttime'  AND product_category='$catehead' GROUP BY product_name";
                         $showquery = $connect->query($sqlshow);
                         $count = 1;
                         $sum_number = 0;

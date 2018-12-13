@@ -8,15 +8,17 @@
 
 require('fpdf/fpdf_thai.php');
 
-$ordertime = $_GET['ordertime'];
+    $begintime = $_GET["begintime"];
+    $lasttime = $_GET["lasttime"];
 
 
 class PDF extends FPDF
 {
 function Header(){
 
-    global $timeset;
-    $this->Cell(0,20,iconv( 'UTF-8','TIS-620','รายงานการขายสินค้าประจำวันที่ ').$timeset,0,1,"C");
+    global $timesetbegin;
+    global $timesetlast;
+    $this->Cell(0,20,iconv( 'UTF-8','TIS-620','รายงานการขายสินค้าประจำวันที่ ').$timesetbegin.iconv( 'UTF-8','TIS-620',' ถึงวันที่ ').$timesetlast,0,1,"C");
     // $this->Cell(0,20,$timeset,1,1,"C");
 }
 //Load data
@@ -36,7 +38,7 @@ function BasicTable($header,$data)
 {
     
 	//Header
-	$w=array(15,40,50,25,20,25);
+	$w=array(15,40,50,15,15,15,25);
 	//Header
 	for($i=0;$i<count($header);$i++)
 		$this->Cell($w[$i],7,iconv('UTF-8','TIS-620',$header[$i]),1,0,'C');
@@ -45,6 +47,7 @@ function BasicTable($header,$data)
     $count = 1;
     $sum_number = 0;
     $sum_price = 0;
+    $sum_discount = 0;
 	foreach ($data as $eachResult) 
 	{
 		if($eachResult["product_name"] != "Reset_queue"){
@@ -52,18 +55,21 @@ function BasicTable($header,$data)
 		$this->Cell(15,7,iconv('UTF-8','TIS-620',$count++),1,0,'C');
         $this->Cell(40,7,iconv('UTF-8','TIS-620',$eachResult["product_category"]),1,0,'C');
         $this->Cell(50,7,iconv('UTF-8','TIS-620',$eachResult["product_name"]),1,0,'C');
-        $this->Cell(25,7,iconv('UTF-8','TIS-620',$eachResult["product_number"]),1,0,'C');
-        $this->Cell(20,7,iconv('UTF-8','TIS-620',$eachResult["product_price"]),1,0,'C');
+        $this->Cell(15,7,iconv('UTF-8','TIS-620',$eachResult["product_number"]),1,0,'C');
+        $this->Cell(15,7,iconv('UTF-8','TIS-620',$eachResult["discount"]),1,0,'C');
+        $this->Cell(15,7,iconv('UTF-8','TIS-620',$eachResult["product_price"]),1,0,'C');
         $this->Cell(25,7,iconv('UTF-8','TIS-620',$eachResult["product_total"]),1,0,'C');
 
         $this->Ln();
         $sum_number += $eachResult['product_number'];
         $sum_price += $eachResult['product_total']; 
+        $sum_discount += $eachResult['discount'];
         }
     }
     $this->Cell(105,7,iconv('UTF-8','TIS-620','สรุปรายการซื้อสินค้าทั้งหมด'),1,0,'C');
-    $this->Cell(25,7,iconv('UTF-8','TIS-620',$sum_number),1,0,'C');
-    $this->Cell(20,7,iconv('UTF-8','TIS-620',''),1,0,'C');
+    $this->Cell(15,7,iconv('UTF-8','TIS-620',$sum_number),1,0,'C');
+    $this->Cell(15,7,iconv('UTF-8','TIS-620',$sum_discount),1,0,'C');
+    $this->Cell(15,7,iconv('UTF-8','TIS-620',''),1,0,'C');
     $this->Cell(25,7,iconv('UTF-8','TIS-620',$sum_price),1,0,'C');
 
 }
@@ -72,16 +78,17 @@ function BasicTable($header,$data)
 
 $pdf = new PDF();
 //Column titles
-$timeset = date('d-m-Y',strtotime($ordertime));
+$timesetbegin = date('d-m-Y',strtotime($begintime));
+$timesetlast = date('d-m-Y',strtotime($lasttime));
 
-$header=array('ลำดับ','หมวดหมู่','รายการสินค้า','จำนวน','ราคา','ราคารวม');
+$header=array('ลำดับ','หมวดหมู่','รายการสินค้า','จำนวน','ส่วนลด','ราคา','ราคารวม');
 
 //Data loading
 
 //*** Load MySQL Data ***//
 require("src/connect.php");
-$strSQL = "SELECT *,SUM(product_number) AS product_number, SUM(product_totalprice) AS product_total
-FROM orderall WHERE DATE(timeorder)='$ordertime' GROUP BY product_name ORDER BY product_category ASC";
+$strSQL = "SELECT *,SUM(product_number) AS product_number, SUM(product_totalprice) AS product_total,SUM(discount) AS discount
+FROM orderall WHERE DATE(timeorder) >='$begintime' AND DATE(timeorder) <='$lasttime' GROUP BY product_name ORDER BY product_category ASC";
 $objQuery = mysqli_query($connect,$strSQL);
 $resultData = array();
 for ($i=0;$i<mysqli_num_rows($objQuery);$i++) {

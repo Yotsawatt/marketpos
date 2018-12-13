@@ -13,7 +13,7 @@
                 <li><a href="./main.php?barcodesearch=">ขายสินค้า</a></li>
                 <li><a href="./product.php">รายการสินค้า</a></li>
                 <li><a href="./reportall.php">รายงานทั้งหมด</a></li>
-                <li><a href="./reportinday.php?ordertime=<?php echo date('Y-m-d'); ?>">รายงานประจำวัน</a></li>
+                <li><a href="./reportinday.php?begintime=<?php echo date('Y-m-d'); ?>&lasttime=<?php echo date('Y-m-d'); ?> ">รายงานประจำวัน</a></li>
             </ul>
             
             <ul class="right hide-on-med-and-down">
