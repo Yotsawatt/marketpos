@@ -1,4 +1,5 @@
-<?php 
+<?php
+    date_default_timezone_set("Asia/Bangkok");
     include "connect.php";
     $showq = "SELECT queueorder FROM orderall ORDER BY id DESC";
     $queryq = $connect->query($showq);
